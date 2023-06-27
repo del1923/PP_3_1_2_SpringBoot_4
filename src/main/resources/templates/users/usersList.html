@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>usersList</title>
+</head>
+<body>
+<br>
+<a class="btn btn-outline-primary" href="/users/newUser" role="button">Новый пользователь</a>
+<br>
+<br>
+<table class="table table-striped">
+    <tr>
+        <th> Id</th>
+        <th> Имя</th>
+        <th> Фамилия</th>
+        <th> Возраст</th>
+        <th> e-mail</th>
+        <th> Действие</th>
+    </tr>
+
+    <tr th:each=" user : ${usersList} ">
+        <td th:text="${ user.getId()}"/>
+        <td th:text="${ user.getName()}"/>
+        <td th:text="${ user.getSurName()}"/>
+        <td th:text="${ user.getAge()}"/>
+        <td th:text="${ user.getEmail()}"/>
+        <td>
+            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                <form th:method="GET" th:action="@{/users/{id}/editUser(id=${user.getId()})}">
+                    <button type="submit" class="btn btn-outline-primary">Редактировать</button>
+                </form>
+                <form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
+                    <button type="submit" class="btn btn-outline-primary">Удалить</button>
+                </form>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
